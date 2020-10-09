@@ -12,6 +12,7 @@ class Launcher(MycroftSkill):
         #self.apps = self.settings
         
     def initialize(self):
+        run("notify-send 'mycroft' 'initializing'")
         self.register_entity_file("app.entity")
         #self.register_entity_file("lang.entity")
         self.white_list = json_reader(self.settings.get("white list").replace("'", '"'))
