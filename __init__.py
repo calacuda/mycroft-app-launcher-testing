@@ -17,6 +17,7 @@ class Launcher(MycroftSkill):
         run("notify-send 'debug' 'registered entity file'")
         #self.register_entity_file("lang.entity")
         self.white_list = json_reader(self.settings.get("white list").replace("'", '"'))
+        run("notify-send 'debug' 'done with whitelist'")
         run(f"notify-send 'whitelist' '{self.white_list}'")
         self.repls = json_reader(self.settings.get("REPLs").replace("'", '"'))
         run(f"notify-send 'repls' '{self.repls}'")
