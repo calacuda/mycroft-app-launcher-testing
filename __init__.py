@@ -12,14 +12,15 @@ class Launcher(MycroftSkill):
         #self.apps = self.settings
         
     def initialize(self):
-        run("notify-send 'mycroft' 'initializing'")
         self.register_entity_file("app.entity")
         #self.register_entity_file("lang.entity")
         self.white_list = json_reader(self.settings.get("white list").replace("'", '"'))
         self.repls = json_reader(self.settings.get("REPLs").replace("'", '"'))
         self.register_intent_file("launch.intent", self.handle_launch_intent)
         #self.apps = self.settings
-
+        run("notify-send 'repls' '{self.repls}'")
+        run(f"notify-send 'whitelist' '{self.white_list}'")
+        
     def equivilency(self, app_name):
         if app_name in {"web browser", "browser", "google", "google machine", "internet", "internet program"}:
             return "browser"
