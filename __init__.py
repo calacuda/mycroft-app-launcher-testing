@@ -1,7 +1,7 @@
 from adapt.intent import IntentBuilder 
 from mycroft import MycroftSkill, intent_handler
 from os import system as run
-from subprocess import Popen
+from subprocess import Popen, PIPE
 from sys import stdout
 
 
@@ -74,20 +74,20 @@ class Launcher(MycroftSkill):
         """
         opens and voice interactive repl
         """
-        self.acknowledge()
+        #self.acknowledge()
         run('notify-send "mycroft" "runing repl"')
         term = self.settings.get("terminal")
         run(f"{term} -e {lang}")
 
     def open_repl(self, lang):
-        p = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
+        p = Popen(cmd, shell=True, stderr=PIPE)
         while True:
             out = p.stderr.read(1)
             if (out == '' and p.poll() != None) or (type(out) == bytes):
                 break
             if out != '':
-                sys.stdout.write(str(out))
-                sys.stdout.flush()
+                stdout.write(str(out))
+                stdout.flush()
         
     def stop(self):
         pass
