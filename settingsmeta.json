@@ -29,16 +29,10 @@
 			"value": "pavucontrol"
 		    },
 		    {
-			"name": "white_list",
+			"name": "white list",
 			"type": "text",
-			"label": "Whitelisted Programs (as a json dictionary)",
-			"value": "minecraft-launcher"
-		    },
-		    {
-			"name": "REPLs",
-			"type": "text",
-			"lable": "Whitelisted Programing REPLs (as a json dictionary)",
-			"value": "julia"
+			"label": "Whitelisted Programs (comma separated)",
+			"value": "discord,steam,lutris,minecraft-launcher"
 		    }
                 ]
             }
