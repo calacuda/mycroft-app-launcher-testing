@@ -85,15 +85,18 @@ class Launcher(MycroftSkill):
         run(f'notify-send "debug" "open repl called"')
         term = self.settings.get("terminal")
         p = Popen(term + " -e " + lang, shell=True, stderr=PIPE)
+        n = 0
         while True:
             run(f'notify-send "debug" "inside while loop"')
             out = p.stderr.read(1)
             if (out == '' and p.poll() != None) or (type(out) == bytes):
                 break
             if out != '':
-                stdout.write(str(out))
+                self.say
+                stdout.write(str(n) + str(out))
                 stdout.flush()
-        
+            n += 1
+            
     def stop(self):
         pass
 
