@@ -29,7 +29,7 @@
 			"value": "pavucontrol"
 		    },
 		    {
-			"name": "white list",
+			"name": "white_list",
 			"type": "text",
 			"label": "Whitelisted Programs (as a jason dictionary ({'<name you say>': '<program to be run, leave blank to use the saem as the key>'}))",
 			"value": "{'minecraft': 'minecraft-launcher','discord': '', 'steam': '', 'lutris': ''}"
