@@ -1,6 +1,8 @@
 from adapt.intent import IntentBuilder 
 from mycroft import MycroftSkill, intent_handler
 from os import system as run
+from subprocess import Popen
+from sys import stdout
 
 
 class Launcher(MycroftSkill):
@@ -68,7 +70,7 @@ class Launcher(MycroftSkill):
             aliases[name.strip()] = value if value.strip() != "" else name.strip()
         return aliases
             
-    def open_repl(self, lang):
+    def open_repl_legacy(self, lang):
         """
         opens and voice interactive repl
         """
@@ -77,7 +79,16 @@ class Launcher(MycroftSkill):
         term = self.settings.get("terminal")
         run(f"{term} -e {lang}")
 
-            
+    def open_repl(self, lang):
+        p = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
+        while True:
+            out = p.stderr.read(1)
+            if (out == '' and p.poll() != None) or (type(out) == bytes):
+                break
+            if out != '':
+                sys.stdout.write(str(out))
+                sys.stdout.flush()
+        
     def stop(self):
         pass
 
