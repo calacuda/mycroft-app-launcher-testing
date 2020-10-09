@@ -83,7 +83,7 @@ class Launcher(MycroftSkill):
 
     def open_repl(self, lang):
         run(f'notify-send "debug" "open repl called"')
-        term = "sterminal" # self.settings.get("terminal")
+        term = self.settings.get("terminal")
         p = Popen(term + " -e " + lang, shell=True, stderr=PIPE)
         n = 0
         while True:
@@ -92,8 +92,8 @@ class Launcher(MycroftSkill):
             if (out == '' and p.poll() != None) or (type(out) == bytes):
                 break
             if out != '':
-                self.say
-                stdout.write(str(n) + str(out))
+                self.speak(out)
+                stdout.write(str(n) + " :  " + str(out))
                 stdout.flush()
             n += 1
             
