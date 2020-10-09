@@ -76,3 +76,4 @@ class Launcher(MycroftSkill):
 
 def create_skill():
     return Launcher()
+
