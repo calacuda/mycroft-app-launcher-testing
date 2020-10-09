@@ -52,7 +52,7 @@ class Launcher(MycroftSkill):
             try:
                 run(application)
             except:
-                #self.speak("bruh... I can't do that.")
+                self.speak("bruh... I can't do that.")
                 run(f'echo "got error when running :  {app.__dict__}\nsettings :  {type(self.settings)}\nsettings :  {self.settings}" > ~/mycroft_launcher_error.txt')
                 run(f'notify-send "Mycroft" "Error opening application {application}. Do you have it installed? Was it spelled correctly whitelisted? Check ~/mycroft_launcher_error.txt for more details." -t 5000')
         else:
