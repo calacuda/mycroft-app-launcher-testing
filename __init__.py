@@ -8,20 +8,22 @@ class Launcher(MycroftSkill):
 
     def __init__(self):
         super().__init__()
+        self.white_list = {}
+        self.repls = {}
         #self.initialize()
         #self.apps = self.settings
         
     def initialize(self):
-        run("notify-send 'debug' 'initializing'")
+        #run("notify-send 'debug' 'initializing'")
         self.register_entity_file("app.entity")
-        run("notify-send 'debug' 'registered entity file'")
+        #run("notify-send 'debug' 'registered entity file'")
         #self.register_entity_file("lang.entity")
-        run(f'notify-send "white list 1" "{self.settings.keys()}"')
-        self.white_list = json_reader(self.settings.get("white list").replace("'", '"'))
-        run(f"notify-send 'whitelist' '{self.white_list}'")
-        self.repls = json_reader(self.settings.get("REPLs").replace("'", '"'))
-        run(f"notify-send 'repls' '{self.repls}'")
-        self.register_intent_file("launch.intent", self.handle_launch_intent)
+        #run(f'notify-send "white list 1" "{self.settings.keys()}"')
+        #self.white_list = json_reader(self.settings.get("white list").replace("'", '"'))
+        #run(f"notify-send 'whitelist' '{self.white_list}'")
+        #self.repls = json_reader(self.settings.get("REPLs").replace("'", '"'))
+        #run(f"notify-send 'repls' '{self.repls}'")
+        #self.register_intent_file("launch.intent", self.handle_launch_intent)
         #self.apps = self.settings
         
     def equivilency(self, app_name):
@@ -36,7 +38,8 @@ class Launcher(MycroftSkill):
 
     def get_target_app(self, app_title):
         app_name = self.equivilency(app_title.lower())
-        white_list_names = self.white_list.keys() #self.settings.get("white list").split(",")
+        white_list = json_reader(self.settings.get("white list").replace("'", '"'))
+        white_list_names = white_list.keys() #self.settings.get("white list").split(",")
         if app_name in self.settings.keys():
             return self.settings.get(app_title)
         #elif app_title not in white_list and app_title not in self.settings.keys():
@@ -54,9 +57,10 @@ class Launcher(MycroftSkill):
         the main hadeller
         """
         application = self.get_target_app(app.data.get("app")) # self.settings.get(self.equivilency(app.data.get("app")))
+        repls = json_reader(self.settings.get("REPLs").replace("'", '"'))
         self.acknowledge()
-        if application in self.repls.keys():
-            self.open_repl(self.repls.get(application))
+        if application in repls.keys():
+            self.open_repl(repls.get(application))
         elif application != 1:
             try:
                 run(f'notify-send "Running" "{application}"')
