@@ -43,7 +43,8 @@ class Launcher(MycroftSkill):
         self.acknowledge()
         application = self.get_target_app(app.data.get("app")) # self.settings.get(self.equivilency(app.data.get("app")))
         #self.acknowledge()
-        repls = self.dict_reader(self.settings.get("REPLs").replace("'", '"'))
+        run(f'notify-send "DEBUG" "{self.settings.keys()}"')
+        repls = self.dict_reader(self.settings.get("REPLs"))
         if application in repls.keys():
             self.open_repl(application)
         elif application != 1:
