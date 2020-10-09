@@ -13,6 +13,7 @@ class Launcher(MycroftSkill):
     def initialize(self):
         self.register_entity_file("app.entity")
         #self.register_intent_file("launch.intent", self.handle_launch_intent)
+        #self.apps = self.settings
 
     def equivilency(self, app_name):
         if app_name in {"web browser", "browser", "google", "google machine", "internet", "internet program"}:
@@ -25,7 +26,6 @@ class Launcher(MycroftSkill):
             return app_name
 
     def get_target_app(self, app_title):
-        run(f'notify-send "DEBUG 1" "{self.settings.keys()}"')
         app_name = self.equivilency(app_title.lower())
         white_list = self.settings.get("white list").split(",")
         if app_name in self.settings.keys():
@@ -39,13 +39,16 @@ class Launcher(MycroftSkill):
         
     @intent_handler("launch.intent")
     def handle_launch_intent(self, app):
-        #run(f'notify-send "DEBUG" "{app.data.get("app")}"')
+        run(f'notify-send "DEBUG" "{app.data.get("app")}"')
         self.acknowledge()
         application = self.get_target_app(app.data.get("app")) # self.settings.get(self.equivilency(app.data.get("app")))
         #self.acknowledge()
-        if application != 1:
+        repls = self.dict_reader(self.settings.get("REPLs").replace("'", '"'))
+        if application in repls.keys():
+            self.open_repl(application)
+        elif application != 1:
+            run(f'notify-send "Running" "{application}"')
             try:
-                run(f'notify-send "Running" "{application}"')
                 run(application)
             except:
                 self.speak("bruh... I can't do that.")
@@ -54,6 +57,22 @@ class Launcher(MycroftSkill):
         else:
             run('notify-send "Mycroft" "I can\'t run that!"')
             self.speak_dialog("unknown_app")
+
+    def dict_reader(self, text):
+        aliases = {}
+        for pair in text.split(","):
+            name, value = pair.split("=")
+            aliases[name.strip()] = value if value.strip() != "" else name.strip()
+        return aliases
+            
+    def open_repl(self, lang):
+        """
+        opens and voice interactive repl
+        """
+        #self.acknowledge()
+        term = self.settings.get("terminal")
+        run(f"{term} -e {lang}")
+
             
     def stop(self):
         pass

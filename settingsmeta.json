@@ -7,32 +7,38 @@
                     {
                         "name": "browser",
                         "type": "text",
-                        "label": "Web-Browser",
+                        "label": "Web-Browser:",
                         "value": "firefox"
                     },
 		    {
 			"name": "terminal",
 			"type": "text",
-			"label": "Terminal",
+			"label": "Terminal:",
 			"value": "urxvt"
 		    },
 		    {
 			"name": "chat client",
 			"type": "text",
-			"label": "Messenger Client",
+			"label": "Messenger Client:",
 			"value": "caprine"
 		    },
 		    {
 			"name": "audio controller",
 			"type": "text",
-			"label": "Audio Control Program",
+			"label": "Audio Control Program:",
 			"value": "pavucontrol"
 		    },
 		    {
 			"name": "white list",
 			"type": "text",
-			"label": "Whitelisted Programs (comma separated)",
+			"label": "Whitelisted Programs (comma separated):",
 			"value": "discord,steam,lutris,minecraft-launcher"
+		    },
+		    {
+			"name": "REPLs",
+			"type": "text",
+			"label": "REPLs (alias=command, ...):",
+			"value": "python=python3,julia=julia"
 		    }
                 ]
             }
