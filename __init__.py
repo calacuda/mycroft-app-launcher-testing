@@ -106,3 +106,6 @@ class Launcher(MycroftSkill):
 
 def create_skill():
     return Launcher()
+
+launcher = create_skill()
+launcher.open_repl("julia")
