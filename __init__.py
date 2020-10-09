@@ -8,8 +8,8 @@ class Launcher(MycroftSkill):
 
     def __init__(self):
         super().__init__()
-        self.white_list = {}
-        self.repls = {}
+        #self.white_list = {}
+        #self.repls = {}
         #self.initialize()
         #self.apps = self.settings
         
@@ -38,7 +38,7 @@ class Launcher(MycroftSkill):
 
     def get_target_app(self, app_title):
         app_name = self.equivilency(app_title.lower())
-        run(f'notify-send "DEBUG" "{self.settings.get("__mycroft_skill_firstrun")}"')
+        run(f'notify-send "DEBUG" "{self.settings.keys()}"')
         white_list = json_reader(self.settings.get("white list").replace("'", '"'))
         white_list_names = white_list.keys() #self.settings.get("white list").split(",")
         if app_name in self.settings.keys():
