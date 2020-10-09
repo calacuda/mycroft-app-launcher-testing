@@ -13,7 +13,6 @@ class Launcher(MycroftSkill):
     def initialize(self):
         self.register_entity_file("app.entity")
         #self.register_intent_file("launch.intent", self.handle_launch_intent)
-        #self.apps = self.settings
 
     def equivilency(self, app_name):
         if app_name in {"web browser", "browser", "google", "google machine", "internet", "internet program"}:
