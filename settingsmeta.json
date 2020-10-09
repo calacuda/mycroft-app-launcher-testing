@@ -1,0 +1,47 @@
+{
+    "skillMetadata": {
+        "sections": [
+            {
+                "name": "Applications",
+                "fields": [
+                    {
+                        "name": "browser",
+                        "type": "text",
+                        "label": "Web-Browser",
+                        "value": "firefox"
+                    },
+		    {
+			"name": "terminal",
+			"type": "text",
+			"label": "Terminal",
+			"value": "urxvt"
+		    },
+		    {
+			"name": "chat client",
+			"type": "text",
+			"label": "Messenger Client",
+			"value": "caprine"
+		    },
+		    {
+			"name": "audio controller",
+			"type": "text",
+			"label": "Audio Control Program",
+			"value": "pavucontrol"
+		    },
+		    {
+			"name": "white list",
+			"type": "text",
+			"label": "Whitelisted Programs (as a jason dictionary ({'<name you say>': '<program to be run, leave blank to use the saem as the key>'}))",
+			"value": "{'minecraft': 'minecraft-launcher','discord': '', 'steam': '', 'lutris': ''}"
+		    },
+		    {
+			"name": "REPLs",
+			"type": "text",
+			"lable": "Whitelisted Programing REPLs (as a json dictionary)",
+			"value": "{\"python\": \"python3\", \"julia\": \"julia\", \"lisp\": \"sbcl\"}"
+		    }
+                ]
+            }
+        ]
+    }
+}
