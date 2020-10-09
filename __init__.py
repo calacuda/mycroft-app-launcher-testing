@@ -93,7 +93,7 @@ class Launcher(MycroftSkill):
                 break
             if out != '':
                 self.speak(out)
-                stdout.write(str(n) + " :  " + str(out))
+                stdout.write(f"{n} :   {str(out)}")
                 stdout.flush()
             n += 1
             
