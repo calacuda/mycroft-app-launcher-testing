@@ -92,10 +92,11 @@ class Launcher(MycroftSkill):
             if (out == '' and p.poll() != None) or (type(out) == bytes):
                 break
             if out != '':
-                self.speak(out)
+                self.speak(str(out))
+                run(f'mimic {out}')
                 stdout.write(f"{n} :   {str(out)}")
                 stdout.flush()
-            n += 1
+                n += 1
             
     def stop(self):
         pass
