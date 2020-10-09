@@ -28,9 +28,9 @@ class Launcher(MycroftSkill):
             return app_name
 
     def get_target_app(self, app_title):
-        run(f'notify-send "app_title" "{app_title}"')
+        #run(f'notify-send "app_title" "{app_title}"')
         app_name = self.equivilency(app_title.lower())
-        run(f'notify-send "app name" "{app_name}"')
+        #run(f'notify-send "app name" "{app_name}"')
         white_list = self.settings.get("white list").split(",")
         #run(f'notify-send "white list" "{white_list}"')
         if app_name in self.settings.keys():
@@ -45,7 +45,7 @@ class Launcher(MycroftSkill):
         
     @intent_handler("launch.intent")
     def handle_launch_intent(self, app):
-        run(f'notify-send "DEBUG" "{app.data.get("app")}"')
+        #run(f'notify-send "DEBUG" "{app.data.get("app")}"')
         self.acknowledge()
         application = self.get_target_app(app.data.get("app")) # self.settings.get(self.equivilency(app.data.get("app")))
         #self.acknowledge()
@@ -85,7 +85,7 @@ class Launcher(MycroftSkill):
         run(f'notify-send "debug" "open repl called"')
         p = Popen(cmd, shell=True, stderr=PIPE)
         while True:
-            run(f'notify-send "debug" "open repl called"')
+            run(f'notify-send "debug" "inside while loop"')
             out = p.stderr.read(1)
             if (out == '' and p.poll() != None) or (type(out) == bytes):
                 break
