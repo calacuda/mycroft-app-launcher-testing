@@ -80,8 +80,10 @@ class Launcher(MycroftSkill):
         run(f"{term} -e {lang}")
 
     def open_repl(self, lang):
+        run(f'notify-send "debug" "open repl called"')
         p = Popen(cmd, shell=True, stderr=PIPE)
         while True:
+            run(f'notify-send "debug" "open repl called"')
             out = p.stderr.read(1)
             if (out == '' and p.poll() != None) or (type(out) == bytes):
                 break
