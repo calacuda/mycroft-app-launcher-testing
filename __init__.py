@@ -13,7 +13,7 @@ class Launcher(MycroftSkill):
         
     def initialize(self):
         self.register_entity_file("app.entity")
-        self.register_entity_file("lang.entity")
+        #self.register_entity_file("lang.entity")
         self.white_list = json_reader(self.settings.get("white list").replace("'", '"'))
         self.repls = json_reader(self.settings.get("REPLs").replace("'", '"'))
         self.register_intent_file("launch.intent", self.handle_launch_intent)
