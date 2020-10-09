@@ -32,13 +32,13 @@
 			"name": "white_list",
 			"type": "text",
 			"label": "Whitelisted Programs (as a jason dictionary ({'<name you say>': '<program to be run, leave blank to use the saem as the key>'}))",
-			"value": "minecraft-launcher"
+			"value": "{'minecraft': 'minecraft-launcher','discord': '', 'steam': '', 'lutris': ''}"
 		    },
 		    {
 			"name": "REPLs",
 			"type": "text",
 			"lable": "Whitelisted Programing REPLs (as a json dictionary)",
-			"value": "julia"
+			"value": "{\"python\": \"python3\", \"julia\": \"julia\", \"lisp\": \"sbcl\"}"
 		    }
                 ]
             }
