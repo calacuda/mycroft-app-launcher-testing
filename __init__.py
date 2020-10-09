@@ -57,7 +57,7 @@ class Launcher(MycroftSkill):
         """
         the main hadeller
         """
-        run(f'notify-send "DEBUG" "{application}"')
+        run(f'notify-send "DEBUG" "{app.data.get("app")}"')
         application = self.get_target_app(app.data.get("app")) # self.settings.get(self.equivilency(app.data.get("app")))
         run(f'notify-send "DEBUG" "{application}"')
         repls = json_reader(self.settings.get("REPLs").replace("'", '"'))
