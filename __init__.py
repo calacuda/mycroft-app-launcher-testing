@@ -34,7 +34,7 @@ class Launcher(MycroftSkill):
         white_list = self.settings.get("white list").split(",")
         #run(f'notify-send "white list" "{white_list}"')
         if app_name in self.settings.keys():
-            run(f'notify-send "debug" "app_name in seting.keys()"')
+            run(f'notify-send "debug" "{app_name} in seting.keys()"')
             return self.settings.get(app_title)
         #elif app_title not in white_list and app_title not in self.settings.keys():
         #    return 1
