@@ -32,13 +32,14 @@ class Launcher(MycroftSkill):
         app_name = self.equivilency(app_title.lower())
         run(f'notify-send "app name" "{app_name}"')
         white_list = self.settings.get("white list").split(",")
-        run(f'notify-send "white list" "{white_list}"')
+        #run(f'notify-send "white list" "{white_list}"')
         if app_name in self.settings.keys():
+            run(f'notify-send "debug" "app_name in seting.keys()"')
             return self.settings.get(app_title)
         #elif app_title not in white_list and app_title not in self.settings.keys():
         #    return 1
         elif (app_title in white_list) or (app_name in white_list):
-            return app_title
+            return app_name
         else:
             return 1
         
@@ -57,7 +58,7 @@ class Launcher(MycroftSkill):
             try:
                 run(application)
             except:
-                self.speak("brah... I can't do that.")
+                self.speak("bru... I can't do that.")
                 run(f'echo "got error when running :  {app.__dict__}\nsettings :  {type(self.settings)}\nsettings :  {self.settings}" > ~/mycroft_launcher_error.txt')
                 run(f'notify-send "Mycroft" "Error opening application {application}. Do you have it installed? Was it spelled correctly whitelisted? Check ~/mycroft_launcher_error.txt for more details." -t 5000')
         else:
