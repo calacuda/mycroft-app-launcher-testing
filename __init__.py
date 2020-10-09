@@ -36,8 +36,10 @@ class Launcher(MycroftSkill):
             return self.settings.get(app_title)
         #elif app_title not in white_list and app_title not in self.settings.keys():
         #    return 1
-        elif (app_title in white_list) or (app_name in white_list):
-            return app_name
+        elif (app_title in white_list):
+            return self.white_list.get(app_title)
+        elif (app_name in white_list):
+            return self.white_list.get(app_name)
         else:
             return 1
         
