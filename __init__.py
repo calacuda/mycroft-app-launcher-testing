@@ -6,12 +6,12 @@ from subprocess import Popen, PIPE
 from sys import stdout
 from pty import spawn
 
-
 class Launcher(MycroftSkill):
     def __init__(self):
         super().__init__()
         #self.initialize()
         #self.apps = self.settings
+        self.lines_in = 0
         
     def initialize(self):
         self.register_entity_file("app.entity")
@@ -75,14 +75,14 @@ class Launcher(MycroftSkill):
             
     def open_repl_legacy(self, lang):
         """
-        opens and voice interactive repl
+        opens and voice interactive repl (does not read to the user)
         """
         #self.acknowledge()
         run('notify-send "mycroft" "runing repl"')
         term = self.settings.get("terminal")
         run(f"{term} -e {lang}")
 
-    def open_repl(self, lang):
+    def open_repl_old(self, lang):
         run(f'notify-send "debug" "open repl called"')
         self.acknowledge()
         term = "sterminal" # self.settings.get("terminal")
@@ -93,7 +93,7 @@ class Launcher(MycroftSkill):
             out = p.stdout.readline()
             displayable = out.decode("utf-8")
             #interactable = out.decode("utf-8")
-            #run('notify-send "debug" "after readline()"')
+            run('notify-send "debug" "after readline()"')
             #run(f'notify-send "output" "{out}"')
             if (out == b'' and p.poll() != None):
                 break
@@ -109,7 +109,23 @@ class Launcher(MycroftSkill):
                     #print("\n\n", dir(p.stdin), "\n\n") #("print('hello')")
                 print(displayable)
                 #run(f'echo "{str(out)}" >> ~/term_out.txt')
+
+    def open_repl(self, lang):
+        self.lines_in = 0
+        spawn(lang, self.read_term)
         
+    def read_term(self, fd):
+        """
+        https://docs.python.org/3/library/pty.html
+        """
+        data = read(fd, 1024)
+        if self.lines_in > 0:
+            self.speak(data)
+            #print(data.decode("utf-8"))
+            pass
+        self.lines_in += 1
+        return data
+                
     def stop(self):
         pass
 
