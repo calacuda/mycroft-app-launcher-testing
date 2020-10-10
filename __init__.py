@@ -111,6 +111,7 @@ class Launcher(MycroftSkill):
                 #run(f'echo "{str(out)}" >> ~/term_out.txt')
 
     def open_repl(self, lang):
+        run('notify-send "debug" "open repl called"')
         self.lines_in = 0
         spawn(lang, self.read_term)
         
