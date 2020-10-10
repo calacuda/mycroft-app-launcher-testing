@@ -121,6 +121,7 @@ class Launcher(MycroftSkill):
         return data
                 
     def open_repl(self, lang):
+        run('notify-send "DEBUG" "open_repl called"')
         self.after_header = False
         spawn(lang, self.read_term)
         self.after_header = False
