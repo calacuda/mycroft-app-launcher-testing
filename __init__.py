@@ -113,7 +113,8 @@ class Launcher(MycroftSkill):
     def open_repl(self, lang):
         run('notify-send "debug" "open repl called"')
         self.lines_in = 0
-        spawn(lang, self.read_term)
+        term = self.settings.get("terminal")
+        spawn(term + " -e " + lang, self.read_term)
         
     def read_term(self, fd):
         """
