@@ -82,7 +82,7 @@ class Launcher(MycroftSkill):
         term = self.settings.get("terminal")
         run(f"{term} -e {lang}")
 
-    def open_repl_old(self, lang):
+    def open_repl(self, lang):
         #run(f'notify-send "debug" "open repl called"')
         term = "sterminal" # self.settings.get("terminal")
         p = Popen(lang, stdout=PIPE, shell=True)
@@ -91,7 +91,7 @@ class Launcher(MycroftSkill):
             #run(f'notify-send "debug" "inside while loop"')
             out = p.stdout.readline()
             displayable = out.decode("utf-8")
-            interactable = out.decode("utf-8", "ignore")
+            interactable = out.decode("utf-8")
             #run('notify-send "debug" "after readline()"')
             #run(f'notify-send "output" "{out}"')
             if (out == b'' and p.poll() != None):
@@ -101,8 +101,8 @@ class Launcher(MycroftSkill):
                 if "julia>" in out.decode("ascii"):
                     not_header = True
                 if not_header:
-                    #self.speak(type(out))
-                    run(f'mimic "{interactable}"')
+                    self.speak(type(out))
+                    #run(f'mimic "{interactable}"')
                     #print("\n\n", dir(p.stdin), "\n\n") #("print('hello')")
                 print(displayable)
                 #run(f'echo "{str(out)}" >> ~/term_out.txt')
@@ -120,7 +120,7 @@ class Launcher(MycroftSkill):
             self.speak(decoded_data)
         return data
                 
-    def open_repl(self, lang):
+    def open_repl_new(self, lang):
         run('notify-send "DEBUG" "open_repl called"')
         self.after_header = False
         spawn(lang, self.read_term)
