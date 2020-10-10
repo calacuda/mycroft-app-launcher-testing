@@ -119,6 +119,7 @@ class Launcher(MycroftSkill):
         """
         https://docs.python.org/3/library/pty.html
         """
+        run('notify-send "debug" "read_term called"')
         data = read(fd, 1024)
         if self.lines_in > 0:
             self.speak(data)
