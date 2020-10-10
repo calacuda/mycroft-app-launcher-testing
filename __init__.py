@@ -85,7 +85,7 @@ class Launcher(MycroftSkill):
     def open_repl(self, lang):
         run(f'notify-send "debug" "open repl called"')
         term = "sterminal" # self.settings.get("terminal")
-        p = Popen(lang, stdout=PIPE, shell=True)
+        p = Popen(term + " -e " + lang, stdout=PIPE, shell=True)
         not_header = False
         while True:
             #run(f'notify-send "debug" "inside while loop"')
