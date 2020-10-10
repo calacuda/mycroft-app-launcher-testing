@@ -111,10 +111,10 @@ class Launcher(MycroftSkill):
                 #run(f'echo "{str(out)}" >> ~/term_out.txt')
 
     def open_repl(self, lang):
-        run('notify-send "debug" "open repl called"')
+        #run('notify-send "debug" "open repl called"')
         self.lines_in = 0
         term = self.settings.get("terminal")
-        run(f'notify-send "debug" "term :  {term}"')
+        #run(f'notify-send "debug" "term :  {term}"')
         spawn(lang, self.read_term)
         
     def read_term(self, fd):
@@ -126,8 +126,8 @@ class Launcher(MycroftSkill):
         if self.lines_in > 0:
             run('notify-send "debug" "after header"')
             self.speak(data.decode("utf-8"))
-            run(f'notify-send "debug" "after {print(data.decode("utf-8"))}"')
-            run('notify-send "debug" "after speak"')
+            run(f'notify-send "debug" "data :   {print(data.decode("utf-8"))}"')
+            #run('notify-send "debug" "after speak"')
             #print(data.decode("utf-8"))
             pass
         self.lines_in += 1
