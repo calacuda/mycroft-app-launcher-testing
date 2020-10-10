@@ -115,7 +115,7 @@ class Launcher(MycroftSkill):
         self.lines_in = 0
         term = self.settings.get("terminal")
         run(f'notify-send "debug" "term :  {term}"')
-        spawn(term + " -e /usr/share/" + lang, self.read_term)
+        spawn(lang, self.read_term)
         
     def read_term(self, fd):
         """
