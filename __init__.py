@@ -126,7 +126,7 @@ class Launcher(MycroftSkill):
         if self.lines_in > 0:
             run('notify-send "debug" "after header"')
             self.speak(data.decode("utf-8"))
-            print(data.decode("utf-8"))
+            run('notify-send "debug" "after {print(data.decode("utf-8"))}"')
             run('notify-send "debug" "after speak"')
             #print(data.decode("utf-8"))
             pass
