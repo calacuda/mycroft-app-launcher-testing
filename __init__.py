@@ -7,10 +7,6 @@ from sys import stdout
 from pty import spawn
 
 
-line_headers = {"julia": "julia>", "python": ">>>"}
-CURRENT_LANG = "julia"
-
-
 class Launcher(MycroftSkill):
     def __init__(self):
         super().__init__()
@@ -117,7 +113,7 @@ class Launcher(MycroftSkill):
         """
         data = read(fd, 1024)
         decoded_data = data.decode("utf-8") 
-        if line_headers.get(CURRENT_LANG) in decoded_data:
+        if "julia>" in decoded_data:
             self.after_header = True
         if self.after_header:
             # run(f'mimic "{decoded_data}"')
@@ -126,7 +122,6 @@ class Launcher(MycroftSkill):
                 
     def open_repl(self, lang):
         self.after_header = False
-        CURRENT_LANG = lang
         spawn(lang, self.read_term)
         self.after_header = False
         
