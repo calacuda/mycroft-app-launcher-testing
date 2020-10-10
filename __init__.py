@@ -98,10 +98,11 @@ class Launcher(MycroftSkill):
                 break
             if out != '':
                 #if n == 0:
-                if "julia>" in out.decode("ascii"):
+                if "julia>" in displayable:
+                    run('notify-send "displayable"')
                     not_header = True
                 if not_header:
-                    self.speak(type(out))
+                    self.speak(displayable)
                     #run(f'mimic "{interactable}"')
                     #print("\n\n", dir(p.stdin), "\n\n") #("print('hello')")
                 print(displayable)
