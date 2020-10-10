@@ -84,6 +84,7 @@ class Launcher(MycroftSkill):
 
     def open_repl(self, lang):
         run(f'notify-send "debug" "open repl called"')
+        self.acknowledge()
         term = "sterminal" # self.settings.get("terminal")
         p = Popen(term + " -e " + lang, stdout=PIPE, shell=True)
         not_header = False
@@ -91,7 +92,7 @@ class Launcher(MycroftSkill):
             #run(f'notify-send "debug" "inside while loop"')
             out = p.stdout.readline()
             displayable = out.decode("utf-8")
-            interactable = out.decode("utf-8")
+            #interactable = out.decode("utf-8")
             #run('notify-send "debug" "after readline()"')
             #run(f'notify-send "output" "{out}"')
             if (out == b'' and p.poll() != None):
@@ -103,29 +104,11 @@ class Launcher(MycroftSkill):
                     not_header = True
                 if not_header:
                     self.speak(displayable)
+                    run(f'notify-send "DEBUG" "{displayable}"')
                     #run(f'mimic "{interactable}"')
                     #print("\n\n", dir(p.stdin), "\n\n") #("print('hello')")
                 print(displayable)
                 #run(f'echo "{str(out)}" >> ~/term_out.txt')
-
-    def read_term(self, fd):
-        """
-        modified form: https://docs.python.org/3/library/pty.html
-        """
-        data = read(fd, 1024)
-        decoded_data = data.decode("utf-8") 
-        if "julia>" in decoded_data:
-            self.after_header = True
-        if self.after_header:
-            # run(f'mimic "{decoded_data}"')
-            self.speak(decoded_data)
-        return data
-                
-    def open_repl_new(self, lang):
-        run('notify-send "DEBUG" "open_repl called"')
-        self.after_header = False
-        spawn(lang, self.read_term)
-        self.after_header = False
         
     def stop(self):
         pass
