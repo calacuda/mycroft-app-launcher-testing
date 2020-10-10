@@ -122,6 +122,7 @@ class Launcher(MycroftSkill):
         https://docs.python.org/3/library/pty.html
         """
         run('notify-send "debug" "read_term called"')
+        run(f'notify-send "debug" "fd :  {fd}"')
         data = read(fd, 1024)
         if self.lines_in > 0:
             run('notify-send "debug" "after header"')
